@@ -1,0 +1,73 @@
+:root {
+  --glow-rgb: 245 245 245;
+
+  --light-gold-rgb: 255 131 19;
+  --dark-gold-rgb: 255 209 122;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #2b2b2b;
+
+  cursor: url('https://cdn.custom-cursor.com/packs/3702/minimal-heart-cursor-pack.png'), auto;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+#star-container {
+  height: 100%;
+
+  background: rgb(var(--light-gold-rgb));
+  background: radial-gradient(circle, rgba(var(--dark-gold-rgb)) 0%, rgba(var(--light-gold-rgb)) 100%);
+}
+
+#star-pattern {
+  animation: pan 180s linear infinite;
+  background-image: url("https://assets.codepen.io/1468070/Star+Pattern+3.svg");
+  background-size: 10%;
+  height: 100%;
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+#star-gradient-overlay {
+  background: radial-gradient(circle, transparent 75%, rgb(var(--light-gold-rgb)));
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+@keyframes pan {
+  0% {
+      background-position: 0 0;
+  }
+
+  100% {
+      background-position: 100% 100%;
+  }
+}
+
+.wrapper {
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  height: 100vh;
+  width: 100vw;
+  /* background-color: #2b2b2b9d; */
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+}

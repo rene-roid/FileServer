@@ -1,0 +1,53 @@
+.modal-button {
+    background: repeating-linear-gradient(135deg, #ff8000cb, #ff8000cb 10px, #ff5500bd 10px, #ff5500bd 20px);
+    border-radius: 10px;
+    border-color: #000;
+    border-width: 0.3em;
+    border-style: solid;
+    animation: movebtn 10s linear infinite;
+    background-size: 300% 300%;
+    padding: 0.2em;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 1em;
+    transition: 0.3s;
+}
+
+.modal-button:hover {
+    background-position: 100% 100%;
+}
+
+@keyframes movebtn {
+    0% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0;
+    }
+}
+
+.modal {
+    background: repeating-linear-gradient(45deg, #2b2b2b, #2b2b2b 10px, #3b3b3b 10px, #3b3b3b 20px);
+    border-radius: 10px;
+    border-color: #000;
+    border-width: 0.3em;
+    border-style: solid;
+    animation: move 10s linear infinite;
+    background-size: 300% 300%;
+    padding: 0.2em;
+    color: white;
+}
+
+@keyframes move {
+    0% {
+        background-position: 100% 100%;
+        /* Start position */
+    }
+
+    100% {
+        background-position: 0% 0;
+        /* End position */
+    }
+}
