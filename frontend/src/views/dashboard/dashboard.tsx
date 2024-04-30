@@ -1,7 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import './dashboard.css';
 
+import useFiles from "../../hooks/useFiles";
+
 const Dashboard: React.FC = () => {
+    const { files, getFiles } = useFiles();
+
+    useEffect(() => {
+        let uuid = localStorage.getItem('uuid');
+
+        if (uuid)
+            getFiles(uuid);
+    }, []);
 
     return (
         <div className="dashboard">
@@ -14,7 +24,18 @@ const Dashboard: React.FC = () => {
             </div>
 
             <div className="body outline-dark">
-                
+                {
+                    files.map((file, index) => {
+                        return (
+                            <div key={index} className="file outline-dark">
+                                <p>{file.data.name}</p>
+                                <button >
+                                    Download
+                                </button>
+                            </div>
+                        );
+                    })
+                }
             </div>
         </div>
     );
