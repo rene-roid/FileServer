@@ -66,4 +66,38 @@ router.post('/', upload.single('file'), (req: Request, res: Response) => {
     }
 });
 
+router.post('/multiple', upload.array('files', 12), (req: Request, res: Response) => {
+    const { uuid } = req.body;
+    const files = req.files as Express.Multer.File[];
+
+    const user = verifyUser(uuid);
+    if (!user)
+        return res.status(401).json({ message: 'Unauthorized' });
+
+    if (!dir)
+        return res.status(500).json({ message: 'Storage directory is not set' });
+
+    if (!files || files.length === 0)
+        return res.status(400).json({ message: 'Files are required' });
+    if (!uuid)
+        return res.status(400).json({ message: 'UUID is required' });
+
+    const uploadDirectory = path.join(dir, uuid);
+    try {
+        fs.mkdirSync(uploadDirectory, { recursive: true }); // Create the directory if it doesn't exist
+
+        const uploadedFiles = files.map(file => {
+            const filename = file.filename;
+            const filePath = path.join(uploadDirectory, filename);
+            fs.renameSync(file.path, filePath);
+            return uploadFile(uuid, file, filename);
+        });
+
+        res.status(200).json({ message: 'Files uploaded successfully', files: uploadedFiles });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Failed to upload files' });
+    }
+});
+
 export default router;

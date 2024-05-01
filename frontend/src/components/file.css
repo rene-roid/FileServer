@@ -1,0 +1,52 @@
+.file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 600px;
+    color: #000;
+}
+
+.file .left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file .middle {
+    flex: 3;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+.file .middle p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file .right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.file .right button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.file .right button:hover {
+    background-color: #45a049;
+}

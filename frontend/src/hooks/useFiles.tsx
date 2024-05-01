@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { IFile } from '../types/file.type';
 
 const useFiles = () => {
-    const [files, setFiles] = useState<any[]>([]);
+    const [files, setFiles] = useState<IFile[]>([]);
 
     const getFiles = async (uuid: string) => {
         try {
