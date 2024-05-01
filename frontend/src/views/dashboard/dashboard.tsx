@@ -5,18 +5,23 @@ import './dashboard.css';
 
 import useFiles from "../../hooks/useFiles";
 import FileCard from "../../components/fileCard";
+import useUpload from "../../hooks/useUpload";
 
 import { IFile } from "../../types/file.type";
 
 const Dashboard: React.FC = () => {
     const { files, getFiles } = useFiles();
+    const { uploadFile } = useUpload();
     const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
+    const [uuid, setUuid] = useState<string>('');
 
     useEffect(() => {
         let uuid = localStorage.getItem('uuid');
 
         if (uuid)
             getFiles(uuid);
+
+        setUuid(uuid!);
     }, []);
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -29,6 +34,12 @@ const Dashboard: React.FC = () => {
     };
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+    const uploadFiles = (event: React.MouseEvent) => {
+        event.stopPropagation();
+        console.log(droppedFiles);
+        uploadFile(uuid, droppedFiles);
+    }
 
     return (
         <div className="dashboard">
@@ -45,6 +56,7 @@ const Dashboard: React.FC = () => {
                         <button onClick={(event) => removeFile(event, index)}>Remove</button>
                     </div>
                 ))}
+            <button onClick={(event) => uploadFiles(event)}>Upload</button>
             </div>
             <div className="main background-dark">
                 <h1>Dashboard</h1>
