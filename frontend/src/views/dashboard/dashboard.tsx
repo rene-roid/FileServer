@@ -14,6 +14,7 @@ const Dashboard: React.FC = () => {
     const { uploadFile } = useUpload();
     const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
     const [uuid, setUuid] = useState<string>('');
+    const [uploading, setUploading] = useState(false);
 
     useEffect(() => {
         let uuid = localStorage.getItem('uuid');
@@ -35,11 +36,20 @@ const Dashboard: React.FC = () => {
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-    const uploadFiles = (event: React.MouseEvent) => {
+    const uploadFiles = async (event: React.MouseEvent) => {
         event.stopPropagation();
         console.log(droppedFiles);
-        uploadFile(uuid, droppedFiles);
-    }
+
+        // Set uploading to true before starting the upload
+        setUploading(true);
+
+        await uploadFile(uuid, droppedFiles);
+        setDroppedFiles([]);
+        getFiles(uuid);
+
+        // Set uploading to false after the upload is complete
+        setUploading(false);
+    };
 
     return (
         <div className="dashboard">
@@ -56,7 +66,7 @@ const Dashboard: React.FC = () => {
                         <button onClick={(event) => removeFile(event, index)}>Remove</button>
                     </div>
                 ))}
-            <button onClick={(event) => uploadFiles(event)}>Upload</button>
+                <button disabled={uploading} onClick={uploadFiles}>Upload</button>
             </div>
             <div className="main background-dark">
                 <h1>Dashboard</h1>
