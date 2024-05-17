@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 import './styles/modal.css'
 import Login from './views/auth/login'
 import Dashboard from './views/dashboard/dashboard'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [uuid, setUuid] = useState<string>('')
+
+  useEffect(() => {
+    let uuid = localStorage.getItem('uuid')
+
+    if (uuid) setUuid(uuid)
+  }, [])
 
   return (
     <>
@@ -18,8 +22,7 @@ function App() {
         </div>
 
         <div className="wrapper">
-          {/* <Login /> */}
-          <Dashboard />
+          {uuid ? <Dashboard /> : <Login />}
         </div>
       </div>
     </>

@@ -22,8 +22,10 @@ router.post('/register', (req: Request, res: Response) => {
 router.post('/login', (req: Request, res: Response) => {
     const { name, password } = req.body;
 
-    if (!name || !password)
-        return res.status(400).json({ message: 'Name and password are required' });
+    if (!name)
+        return res.status(400).json({ message: 'Name is required' });
+    if (!password)
+        return res.status(400).json({ message: 'Password is required' });
 
     const user = loginUser(name, password);
     if (user.uuid)

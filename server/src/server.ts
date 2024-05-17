@@ -41,6 +41,10 @@ app.use('/files', filesRouter);
 import downloadRouter from './routes/download';
 app.use('/download', downloadRouter);
 
+// Remove
+import removeRouter from './routes/remove';
+app.use('/remove', removeRouter);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

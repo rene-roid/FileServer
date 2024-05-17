@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import axios from 'axios';
 
 const useUpload = () => {
@@ -21,6 +20,8 @@ const useUpload = () => {
                     },
                     responseType: 'blob',
                 });
+
+                console.log(response);
             }
 
             return true;

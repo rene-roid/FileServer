@@ -27,14 +27,14 @@ const uploadFile = (uuid: string, file: Express.Multer.File, id: string) => {
 const getFiles = (uuid: string) => {
     const fileJsonDir = path.join(userFiles, uuid, 'files.json');
     if (!fs.existsSync(fileJsonDir))
-        fs.writeFileSync(fileJsonDir, JSON.stringify([]));
+        return [];
     return JSON.parse(fs.readFileSync(fileJsonDir, "utf-8"));
 }
 
 const getFile = (uuid: string, id: string) => {
     const fileJsonDir = path.join(userFiles, uuid, 'files.json');
     if (!fs.existsSync(fileJsonDir))
-        fs.writeFileSync(fileJsonDir, JSON.stringify([]));
+        return [];
     const fileJson = JSON.parse(fs.readFileSync(fileJsonDir, "utf-8"));
     return fileJson.find((f: { id: string }) => f.id === id);
 }
@@ -42,7 +42,7 @@ const getFile = (uuid: string, id: string) => {
 const deleteFile = (uuid: string, id: string) => {
     const fileJsonDir = path.join(userFiles, uuid, 'files.json');
     if (!fs.existsSync(fileJsonDir))
-        fs.writeFileSync(fileJsonDir, JSON.stringify([]));
+        return [];
     let fileJson = JSON.parse(fs.readFileSync(fileJsonDir, "utf-8"));
     fileJson = fileJson.filter((f: { id: string }) => f.id !== id);
     fs.writeFileSync(fileJsonDir, JSON.stringify(fileJson, null, 2));

@@ -4,7 +4,7 @@ interface IFile {
         name: string;
         size: number;
         date: string;
-    }
+    };
 }
 
 export type { IFile };

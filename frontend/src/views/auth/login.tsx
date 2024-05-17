@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import './login.css'
 
 import useAuth from '../../hooks/useAuth';
 
 const Login: React.FC = () => {
-    const { uuid, login } = useAuth();
+    const { login } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -15,15 +15,9 @@ const Login: React.FC = () => {
         const password = (form.elements[1] as HTMLInputElement).value;
 
         await login(username, password);
+
+        window.location.reload();
     }
-
-    useEffect(() => {
-        if (uuid) {
-            console.log('User authenticated');
-        }
-
-        localStorage.setItem('uuid', uuid || '');
-    }, [uuid]);
 
     return (
         <>

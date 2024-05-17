@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import axios from 'axios';
 
 const useDownload = () => {
@@ -33,7 +32,7 @@ const useDownload = () => {
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     return { downloadFile };
 }

@@ -15,6 +15,7 @@ const Dashboard: React.FC = () => {
     const [droppedFiles, setDroppedFiles] = useState<File[]>([]);
     const [uuid, setUuid] = useState<string>('');
     const [uploading, setUploading] = useState(false);
+    const [editMode, setEditMode] = useState(true);
 
     useEffect(() => {
         let uuid = localStorage.getItem('uuid');
@@ -61,16 +62,16 @@ const Dashboard: React.FC = () => {
                         <p>Drag 'n' drop some files here, or click to select files</p>
                 }
                 {droppedFiles.map((file, index) => (
-                    <div key={index}>
-                        <span>{file.name}</span>
-                        <button onClick={(event) => removeFile(event, index)}>Remove</button>
+                    <div key={index} className="upload-item-card">
+                        <span className="upload-item">{file.name}</span>
+                        <button onClick={(event) => removeFile(event, index)} className="remove">Remove</button>
                     </div>
                 ))}
-                <button disabled={uploading} onClick={uploadFiles}>Upload</button>
+                <button disabled={uploading} onClick={uploadFiles} className="upload">Upload</button>
             </div>
             <div className="main background-dark">
-                <h1>Dashboard</h1>
-                <p>Welcome to the dashboard</p>
+                <h1>LibreStorage</h1>
+                {/* <p></p> */}
             </div>
 
             <div className="body outline-dark">
@@ -78,11 +79,15 @@ const Dashboard: React.FC = () => {
                     files.map((file: IFile, index: number) => {
                         return (
                             <div key={index} className="file-item">
-                                <FileCard {...file} />
+                                <FileCard file={file} edit={editMode} />
                             </div>
                         );
                     })
                 }
+            </div>
+
+            <div className="footer">
+                <button className="footer-btn" onClick={() => setEditMode(!editMode)}>{editMode ? 'Edit' : 'Done'}</button>
             </div>
         </div>
     );

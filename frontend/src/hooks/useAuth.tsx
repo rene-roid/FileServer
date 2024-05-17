@@ -1,12 +1,34 @@
 import { useState } from "react";
+import axios from 'axios';
 
 const useAuth = () => {
     const [uuid, setUuid] = useState<string | null>(null);
 
-    const login = (username: string, password: string) => {
-        // Here you should add the logic to authenticate the user
-        // For now, we'll just set the uuid to '1234'
-        setUuid('1234');
+    const login = async (username: string, password: string) => {
+        try {
+            const response = await axios.post('http://localhost:3000/auth/login',
+                {
+                    name: username,
+                    password: password
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+
+            const data = response.data;
+
+            setUuid(data.uuid);
+
+            if (data.uuid) {
+                console.log('User authenticated');
+                localStorage.setItem('uuid', data.uuid);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return { uuid, login };
