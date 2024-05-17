@@ -25,3 +25,10 @@ dist-ssr
 
 # Cache directories
 server/.env
+
+# ignore all .js of the server folder
+server/**/*.js
+!server/**/*.config.js
+!server/**/*.config.ts
+!server/**/*.config.mjs
+!server/**/*.config.cjs
