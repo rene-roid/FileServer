@@ -8,7 +8,7 @@ Ever felt suffocated by the restrictions and complexities of cloud storage servi
 
 ## Key Features 🌈
 
-- **No Space Constraints:** Sky's the limit! Upload as many files as you wish, of any size, as long as our servers can handle it.
+- **No Space Constraints:** Sky's the limit! Upload as many files as you wish, of any size, as long as your machine can handle it.
   
 - **Freedom First:** We keep it simple. No encryption, no fuss. Your files remain in their purest form, no barriers attached.
 
